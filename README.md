@@ -2,6 +2,11 @@
   <h1>FlightLog</h1>
   <p><strong>A breathtaking, automated Changelog engine for modern SaaS.</strong></p>
   <p>Linear-style aesthetics. 100% open-source. Powered by Astro and Tailwind CSS.</p>
+
+  <!-- Social Proof Badges -->
+  <a href="https://flightlog.scramjet.io" target="_blank"><img src="https://img.shields.io/badge/Live-Demo-2ecc71?style=flat-square&logo=cloudflarepages&logoColor=white" alt="Live Demo"></a>
+  <a href="https://github.com/scramjetio/flight-log/actions"><img src="https://img.shields.io/github/actions/workflow/status/scramjetio/flight-log/ci.yml?style=flat-square" alt="CI Status"></a>
+  <a href="https://github.com/scramjetio/flight-log/blob/main/LICENSE"><img src="https://img.shields.io/github/license/scramjetio/flight-log?style=flat-square" alt="License"></a>
 </div>
 
 ---
