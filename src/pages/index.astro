@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch all releases and sort by date descending
+const allReleases = await getCollection('releases');
+const sortedReleases = allReleases.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Changelog | FlightLog">
+	<div class="relative">
+		<!-- Vertical Timeline Line -->
+		<div class="absolute left-[15px] md:left-[39px] top-4 bottom-0 w-[2px] bg-gray-800"></div>
+
+		<div class="space-y-16">
+			{sortedReleases.map(async (release) => {
+				const { Content } = await release.render();
+				const formattedDate = new Intl.DateTimeFormat('en-US', {
+					month: 'short',
+					day: 'numeric',
+					year: 'numeric'
+				}).format(release.data.date);
+
+				return (
+					<article class="relative flex flex-col md:flex-row gap-6 md:gap-12 group">
+						<!-- Timeline Node/Dot -->
+						<div class="absolute left-0 md:static flex items-start pt-1 z-10">
+							<div class="w-8 h-8 rounded-full bg-gray-900 border-[3px] border-gray-700 flex items-center justify-center group-hover:border-blue-500 transition-colors duration-300">
+								<div class="w-2 h-2 rounded-full bg-gray-500 group-hover:bg-blue-400 transition-colors duration-300"></div>
+							</div>
+						</div>
+
+						<!-- Content Area -->
+						<div class="flex-1 pl-12 md:pl-0">
+							<header class="mb-4">
+								<div class="flex flex-wrap items-center gap-3 mb-2">
+									<time class="text-sm font-medium text-gray-400">{formattedDate}</time>
+									{release.data.version && (
+										<span class="text-xs font-mono px-2 py-0.5 rounded bg-gray-800 text-gray-300">{release.data.version}</span>
+									)}
+									{release.data.badge && (
+										<span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+											{release.data.badge}
+										</span>
+									)}
+								</div>
+								<h2 class="text-2xl font-semibold tracking-tight text-white">{release.data.title}</h2>
+							</header>
+
+							<div class="prose prose-invert prose-gray max-w-none 
+										prose-headings:font-semibold prose-headings:tracking-tight 
+										prose-a:text-blue-400 hover:prose-a:text-blue-300
+										prose-p:text-gray-300 prose-p:leading-relaxed
+										prose-li:text-gray-300">
+								<Content />
+							</div>
+						</div>
+					</article>
+				);
+			})}
+		</div>
+	</div>
+</Layout>
