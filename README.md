@@ -1,4 +1,7 @@
+<!-- The Visual Hook -->
 <div align="center">
+  <img src=".github/assets/hero.png" alt="FlightLog Hero Image" width="600">
+  
   <h1>FlightLog</h1>
   <p><strong>A breathtaking, automated Changelog engine for modern SaaS.</strong></p>
   <p>Linear-style aesthetics. 100% open-source. Powered by Astro and Tailwind CSS.</p>
