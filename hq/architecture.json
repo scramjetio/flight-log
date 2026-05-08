@@ -1,0 +1,87 @@
+{
+  "core_purpose": "FlightLog is an open-source, Astro-powered changelog engine with a Linear-style dark-mode timeline UI for modern SaaS products. It renders MDX release notes from a content collection into a static, zero-JS site that can be deployed to Cloudflare, Vercel, or Netlify.",
+  "status": "Production-ready",
+  "architecture": {
+    "frontend": "Astro + Tailwind CSS (MDX content collections)",
+    "backend": "None (static site; intended for Cloudflare Pages)",
+    "database": "None (file-based MDX collection in src/content/releases)"
+  },
+  "main_features": [
+    {
+      "name": "Vertical Timeline Changelog UI",
+      "status": "Operational",
+      "files_involved": [
+        "src/pages/index.astro",
+        "src/layouts/Layout.astro"
+      ]
+    },
+    {
+      "name": "MDX Release Notes Collection",
+      "status": "Operational",
+      "files_involved": [
+        "src/content/config.ts",
+        "src/content/releases/flightlog-v1.mdx",
+        "src/content/releases/afterburner-v1.mdx",
+        "src/content/releases/slipstream-v1.mdx",
+        "src/content/releases/flight-manual-v1.mdx"
+      ]
+    },
+    {
+      "name": "Schema-validated Frontmatter (title/date/version/badge)",
+      "status": "Operational",
+      "files_involved": [
+        "src/content/config.ts"
+      ]
+    },
+    {
+      "name": "Dark-mode Theming with Tailwind Typography",
+      "status": "Operational",
+      "files_involved": [
+        "tailwind.config.mjs",
+        "src/layouts/Layout.astro"
+      ]
+    },
+    {
+      "name": "OpenGraph / Twitter Card Metadata",
+      "status": "Operational",
+      "files_involved": [
+        "src/layouts/Layout.astro"
+      ]
+    },
+    {
+      "name": "Scramjet AI Auto-publishing Pipeline (PR -> MDX commit)",
+      "status": "Stubbed",
+      "files_involved": [
+        "README.md"
+      ]
+    },
+    {
+      "name": "Demo WebP/GIF in README",
+      "status": "Stubbed",
+      "files_involved": [
+        "README.md"
+      ]
+    },
+    {
+      "name": "CI Workflow",
+      "status": "Operational",
+      "files_involved": [
+        ".github/"
+      ]
+    },
+    {
+      "name": "Lint/Format Tooling (Biome + ESLint + Prettier + Husky + commitlint)",
+      "status": "Operational",
+      "files_involved": [
+        "biome.json",
+        "package.json",
+        ".husky/",
+        "commitlint.config.js"
+      ]
+    }
+  ],
+  "technical_debt": "No automated test suite exists (no test runner, no test files, no test script in package.json). Tooling is duplicated and inconsistent — Biome, ESLint, and Prettier are all configured simultaneously, with lint-staged running Prettier while `npm run check` runs Biome format + ESLint. README contains an explicit `[TODO]` placeholder for a demo GIF and references a `.github/assets/demo.webp` that is not committed. The headline 'automated' Scramjet integration is described in prose only — no webhook handler, GitHub Action, or pipeline code is present in the repo, so the core 'Trojan Horse' value prop is documentation-only. External links (live demo at flightlog.scramjet.io, deploy-to-Cloudflare URL, Discord, scramjet.io) are unverified and may be aspirational. Astro 4.5 and @astrojs/check 0.5 are several majors behind current; pnpm is declared as packageManager but a husky/lint-staged setup still assumes npm-style flows.",
+  "active_roadmap": [
+    "No open GitHub issues — roadmap is implicit. Likely next steps inferred from code: ship the Scramjet auto-publishing pipeline (currently README-only), add the missing demo.webp asset, consolidate the Biome/ESLint/Prettier toolchain, introduce a test suite, and upgrade Astro from 4.5 to current."
+  ]
+}
